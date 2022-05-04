@@ -6,13 +6,16 @@ description: |-
 runs:
   using: "composite"
   steps:
+
     - shell: bash
-      name: run diagnostics.
       id: diagnostics
-      run: "bash ${{github.action_path}}/diagnose.bash"
+      run: "#diagnostics.\nbash ${{github.action_path}}/diagnose.bash"
 
     - shell: bash
       run: "#print diagnostics output.\njq -CSer '.' <<'EOF'\n${{ toJSON(steps.diagnostics.outputs) }}\nEOF\n"
+
+    - {run: "#print runner.*\njq -SreC '.' <<'__JSON_DATA__'\n${{ toJSON(runner) }}\n__JSON_DATA__\n", shell: bash}
+    - {run: "#print github.*\njq -SreC '.' <<'__JSON_DATA__'\n${{ toJSON(github) }}\n__JSON_DATA__\n", shell: bash}
 
 outputs:
   outcome: 

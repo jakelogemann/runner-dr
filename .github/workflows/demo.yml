@@ -1,4 +1,4 @@
-name: "test"
+name: "demo"
 concurrency: { group: "${{ github.workflow }}-${{ github.event_name }}" }
 permissions: 
   contents: read
@@ -16,7 +16,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v2"
-      - name: "execute this action."
-        uses: "./."
-        id: "main"
+      - {name: "checkout the code.", uses: "actions/checkout@v2"}
+      - {name: "execute this action.", uses: "./."}
