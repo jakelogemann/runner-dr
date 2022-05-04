@@ -17,6 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
-      - {uses: "./.", id: "main"}
-      - name: "print output."
-        run: "jq -CSer '.' <<'EOF'\n${{ toJSON(steps.main.outputs) }}\nEOF\n"
+      - name: "execute this action."
+        uses: "./."
+        id: "main"
