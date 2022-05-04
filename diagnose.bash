@@ -30,7 +30,7 @@ grouped "Runner's Docker info" "docker system info"
 grouped "Runner's Podman info" "podman system info"
 grouped "Runner's Current Memory Usage" "free -mh"
 grouped "Runner hardware information" "lshw"
-grouped "\$PATH (where the binaries are)" "echo \$PATH | tr ':' '\n'"
+grouped "\$PATH (where the binaries are)" "echo \$PATH | tr ':' '\n' | nl -w2 -s'. '"
 grouped "Available binaries" "echo $PATH | tr ':' '\n' | xargs -n1 ls -1 2>/dev/null | sort -u | tr '\n' ';' | sed -e 's/\;/  /g'"
 grouped "XTerm Colors" "dump_colors"
 
