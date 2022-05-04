@@ -1,0 +1,20 @@
+# 
+name: "runner-dr"
+description: |-
+  Runs a few debug/triaging commands on a runner to attempt to provide useful
+  diagnostics to ... well, you. "The Doctor is in."
+runs:
+  using: "composite"
+  steps:
+    - {id: diagnostics, shell: bash, run: "bash ${{github.action_path}}/diagnose.bash"}
+
+outputs:
+  outcome: 
+    description: "outcome (usually success; sometimes failure)"
+    value: ${{steps.diagnostics.outcome}} 
+  hostname: 
+    description: "runner's hostname"
+    value: ${{steps.diagnostics.outputs.hostname}} 
+  cpu: 
+    description: "runner's hostname"
+    value: ${{steps.diagnostics.outputs.cpu}} 
