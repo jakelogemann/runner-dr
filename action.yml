@@ -12,9 +12,7 @@ runs:
       run: "bash ${{github.action_path}}/diagnose.bash"
 
     - shell: bash
-      name: "print output."
-      run: "jq -CSer '.' <<'EOF'\n${{ toJSON(steps.diagnostics.outputs) }}\nEOF\n"
-
+      run: "#print diagnostics output.\njq -CSer '.' <<'EOF'\n${{ toJSON(steps.diagnostics.outputs) }}\nEOF\n"
 
 outputs:
   outcome: 
