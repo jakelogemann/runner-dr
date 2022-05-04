@@ -6,7 +6,15 @@ description: |-
 runs:
   using: "composite"
   steps:
-    - {id: diagnostics, shell: bash, run: "bash ${{github.action_path}}/diagnose.bash"}
+    - shell: bash
+      name: run diagnostics.
+      id: diagnostics
+      run: "bash ${{github.action_path}}/diagnose.bash"
+
+    - shell: bash
+      name: "print output."
+      run: "jq -CSer '.' <<'EOF'\n${{ toJSON(steps.diagnostics.outputs) }}\nEOF\n"
+
 
 outputs:
   outcome: 
